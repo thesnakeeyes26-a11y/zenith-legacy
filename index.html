@@ -116,11 +116,110 @@
     font-weight: 300;
   }
 
-  /* ── SERVICES (empty, like reference) ── */
+  /* ── SERVICES ── */
   #services {
     border-top: 1px solid var(--hairline);
-    padding: 56px 0 200px 0;
+    padding: 56px 0 100px 0;
   }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    margin-top: 56px;
+  }
+
+  .service-card {
+    background: var(--black3); border-radius: 12px;
+    padding: 40px; display: flex; flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover { transform: translateY(-4px); }
+
+  .service-number {
+    font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.3em; color: var(--gold-dim); margin-bottom: 20px; display: block;
+  }
+
+  .service-name {
+    font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;
+    color: var(--white); margin-bottom: 14px; line-height: 1.25;
+  }
+
+  .service-desc {
+    font-size: 14px; color: var(--white-dim); line-height: 1.8;
+    font-weight: 300; margin-bottom: 22px;
+  }
+
+  .service-features {
+    list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px;
+  }
+  .service-features li {
+    font-size: 13px; color: var(--white-dim); font-weight: 300;
+    display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+  }
+  .feature-dot {
+    width: 5px; height: 5px; background: var(--gold); border-radius: 50%;
+    flex-shrink: 0; margin-top: 6px;
+  }
+
+  .service-learn-btn {
+    display: inline-block; font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--white); border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 6px; text-decoration: none; font-family: 'Inter', sans-serif;
+    font-weight: 500; cursor: pointer; background: none; border-top: none;
+    border-left: none; border-right: none; transition: color 0.25s, border-color 0.25s;
+    margin-top: auto; align-self: flex-start;
+  }
+  .service-learn-btn:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.86); z-index: 999;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal-box {
+    background: var(--black3); border: 1px solid var(--hairline); border-radius: 12px;
+    max-width: 600px; width: 100%; padding: 52px 48px; position: relative;
+    transform: translateY(20px); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    max-height: 90vh; overflow-y: auto;
+  }
+  .modal-overlay.open .modal-box { transform: translateY(0); }
+
+  .modal-close {
+    position: absolute; top: 22px; right: 26px; background: none; border: none;
+    color: var(--white-dim); font-size: 22px; cursor: pointer; line-height: 1;
+    transition: color 0.2s; padding: 4px 8px; font-family: 'Inter', sans-serif;
+  }
+  .modal-close:hover { color: var(--gold); }
+
+  .modal-eyebrow {
+    font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px; display: block; font-weight: 500;
+  }
+  .modal-title {
+    font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700;
+    color: var(--white); margin-bottom: 22px; line-height: 1.2;
+  }
+  .modal-desc { font-size: 15px; color: var(--white-dim); line-height: 1.85; font-weight: 300; margin-bottom: 30px; }
+
+  .modal-features-title {
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px;
+  }
+  .modal-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .modal-features li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--white-dim); line-height: 1.6; font-weight: 300; }
+  .modal-features li .feature-dot { margin-top: 7px; }
+
+  .modal-cta {
+    display: inline-block; background: var(--gold); color: var(--black); border: none;
+    padding: 16px 40px; border-radius: 40px;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+    text-decoration: none; transition: opacity 0.25s; width: 100%; text-align: center;
+  }
+  .modal-cta:hover { opacity: 0.85; }
 
   /* ── WHY US (overlapping numbers, like reference) ── */
   #why {
@@ -293,6 +392,7 @@
     nav { padding: 16px 24px; }
     .nav-links li:not(:last-child) { display: none; }
     #services { padding: 56px 0 80px 0; }
+    .services-grid { grid-template-columns: 1fr; }
     .why-grid { grid-template-columns: 1fr; gap: 48px; }
     #process { padding: 100px 0 80px 0; }
     .process-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -368,10 +468,57 @@
     <span class="section-eyebrow">What We Do</span>
     <h2 class="section-title">Services That Transform</h2>
     <p class="section-sub">From automation to stunning visuals — we build the systems that scale your business.</p>
-  </div>
-</section>
 
-<!-- ── WHY US ── -->
+    <div class="services-grid">
+
+      <div class="service-card">
+        <span class="service-number">01</span>
+        <div class="service-name">Work Automation</div>
+        <p class="service-desc">We design and deploy AI-powered workflows that eliminate repetitive manual work — email and WhatsApp auto-replies, lead capture, CRM integration, and custom automations built around your business.</p>
+        <ul class="service-features">
+          <li><span class="feature-dot"></span>Email &amp; WhatsApp auto-reply setup</li>
+          <li><span class="feature-dot"></span>Lead capture &amp; CRM integration</li>
+          <li><span class="feature-dot"></span>Custom AI workflow building</li>
+        </ul>
+        <button onclick="openModal('automation')" class="service-learn-btn">Learn More</button>
+      </div>
+
+      <div class="service-card">
+        <span class="service-number">02</span>
+        <div class="service-name">Website Development</div>
+        <p class="service-desc">We build premium, animated, mobile-responsive websites that convert visitors into clients — fast, modern, and tailored to your brand from the ground up.</p>
+        <ul class="service-features">
+          <li><span class="feature-dot"></span>Premium animated design</li>
+          <li><span class="feature-dot"></span>Mobile-responsive &amp; fast loading</li>
+          <li><span class="feature-dot"></span>Built to convert visitors into clients</li>
+        </ul>
+        <button onclick="openModal('website')" class="service-learn-btn">Learn More</button>
+      </div>
+
+      <div class="service-card">
+        <span class="service-number">03</span>
+        <div class="service-name">Video Editing</div>
+        <p class="service-desc">From punchy social media reels to full brand films, we craft videos that stop the scroll and tell your story. Every project is handled with precision — sharp cuts and crisp audio that hits right.</p>
+        <ul class="service-features">
+          <li><span class="feature-dot"></span>Instagram Reels, YouTube &amp; Ad video edits</li>
+          <li><span class="feature-dot"></span>Subtitles &amp; captions</li>
+        </ul>
+        <button onclick="openModal('video')" class="service-learn-btn">Learn More</button>
+      </div>
+
+      <div class="service-card">
+        <span class="service-number">04</span>
+        <div class="service-name">Voice Agent Services</div>
+        <p class="service-desc">Deploy intelligent AI voice agents that handle customer queries, qualify leads, and manage appointments — 24/7, with human-like precision and zero downtime.</p>
+        <ul class="service-features">
+          <li><span class="feature-dot"></span>24/7 AI call handling</li>
+          <li><span class="feature-dot"></span>Lead qualification &amp; appointment booking</li>
+          <li><span class="feature-dot"></span>Hindi + English language support</li>
+        </ul>
+        <button onclick="openModal('voice')" class="service-learn-btn">Learn More</button>
+      </div>
+
+    </div>
 <section id="why">
   <div class="section-inner">
     <span class="section-eyebrow">Why Zenith</span>
@@ -577,6 +724,90 @@
     <div class="footer-copy">© 2026 Zenith Legacy. All rights reserved.</div>
   </div>
 </footer>
+
+<!-- ── SERVICE MODALS ── -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modal-box">
+    <button class="modal-close" onclick="closeModalDirect()">&#10005;</button>
+    <span class="modal-eyebrow" id="modal-eyebrow"></span>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <p class="modal-desc" id="modal-desc"></p>
+    <div class="modal-features-title">What's Included</div>
+    <ul class="modal-features" id="modal-features"></ul>
+    <a href="#contact" class="modal-cta" onclick="closeModalDirect()">Start a Project</a>
+  </div>
+</div>
+
+<script>
+const services = {
+  automation: {
+    eyebrow: "Service 01",
+    title: "Work Automation",
+    desc: "We design and deploy AI-powered automation systems that eliminate repetitive manual work from your business. From lead management to client communication — every workflow is custom-built for your exact needs, saving you hours every single day.",
+    features: [
+      "Email & WhatsApp auto-reply setup",
+      "Lead capture & CRM integration (Notion, Google Sheets)",
+      "Automated follow-up sequences",
+      "Invoice & payment reminder automation",
+      "Custom n8n / Make workflow building",
+      "Ongoing support & optimization"
+    ]
+  },
+  website: {
+    eyebrow: "Service 02",
+    title: "Website Development",
+    desc: "We build premium, animated, mobile-responsive websites that convert visitors into clients. From first concept to live deployment, every site is custom-designed around your brand and built to perform.",
+    features: [
+      "Custom premium design — no templates",
+      "Smooth animations & scroll effects",
+      "Mobile-first, fully responsive layouts",
+      "Fast loading & SEO-friendly structure",
+      "Contact forms & lead capture built in",
+      "Free hosting setup & deployment"
+    ]
+  },
+  video: {
+    eyebrow: "Service 03",
+    title: "Video Editing",
+    desc: "From punchy social media reels to full brand films, we craft videos that stop the scroll and tell your story. Every project is handled with precision — sharp cuts and crisp audio that hits right.",
+    features: [
+      "Instagram Reels, YouTube & Ad video edits",
+      "Subtitles, captions & multilingual text",
+      "Raw footage to final delivery"
+    ]
+  },
+  voice: {
+    eyebrow: "Service 04",
+    title: "Voice Agent Services",
+    desc: "Deploy intelligent AI voice agents that work 24/7 — handling inbound queries, qualifying leads, booking appointments, and more. Your business stays responsive even when your team is offline, with zero drop in quality.",
+    features: [
+      "24/7 inbound AI call handling",
+      "Lead qualification & scoring calls",
+      "Automated appointment booking",
+      "Custom voice & personality setup",
+      "Hindi + English language support",
+      "Call logs, analytics & reporting"
+    ]
+  }
+};
+
+function openModal(key) {
+  const s = services[key];
+  document.getElementById('modal-eyebrow').textContent = s.eyebrow;
+  document.getElementById('modal-title').textContent = s.title;
+  document.getElementById('modal-desc').textContent = s.desc;
+  const ul = document.getElementById('modal-features');
+  ul.innerHTML = s.features.map(f => `<li><span class="feature-dot"></span>${f}</li>`).join('');
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) { if (e.target === document.getElementById('modal-overlay')) closeModalDirect(); }
+function closeModalDirect() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModalDirect(); });
+</script>
 
 </body>
 </html>
